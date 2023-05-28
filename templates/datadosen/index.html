@@ -1,0 +1,130 @@
+<!-- 
+   
+-->
+<html>
+<head>
+   <style>
+      *{margin: 0; padding: 0;}
+      body{
+          background-color: #fff;
+          font-family: Arial, Helvetica, sans-serif;
+          color: #000;
+      }
+      nav{
+          margin: auto;
+          text-align: center;
+          width: 100%;
+      }
+      nav ul ul{
+          display: none;
+      }
+      nav ul li :hover > ul{
+          display: block;
+          width: 150px;
+      }
+      nav ul{
+          background: #53bd84;
+          padding: 0 20px;
+          list-style: none;
+          position: relative;
+          display: inline-table;
+          width: 100%;
+      }
+      nav ul::after{
+          content: "";
+          clear: both;
+          display: block;
+      }
+      nav ul li {
+          float: left;
+      }
+      nav ul li:hover a{
+          color: #fff;
+      }
+      nav ul li a{
+          display: block;
+          padding: 25px;
+          color: #fff;
+          text-decoration: none;
+      }
+      nav ul ul li {
+          float: none;
+          border-top: 1px solid #53bd84;
+          border-bottom: 1px solid #53bd84;
+          position: relative;
+      }
+      nav ul ul li a {
+          padding: 15px 40px;
+          color: #fff;
+      }
+      nav ul ul li a:hover{
+          background-color: #666;
+      }
+      nav ul ul ul {
+          position: absolute;
+          left: 100%;
+          top: 0;
+      }
+
+  </style>
+   <nav>
+      <ul>
+          <li><a href="http://localhost:3000/homepage">Home</a></li>
+          <li><a href="http://localhost:3000/view">Data Base </a>
+              <ul>
+              <li><a href="#">Anggota</a></li>
+              <li><a href="#">Buku</a></li>
+              <li><a href="#">Kategori Buku</a></li>
+              </ul>
+          </li>
+          <li><a href="#">Transaksi</a>
+          <ul>
+              <li><a href="#">_Peminjaman</a></li>
+              <li><a href="#">_Pengembalian</a></li>
+          </ul>
+          </li>
+          <li><a href="#" onClick="return confirm('yakin?')">Logout</a></li>
+      </ul>
+  </nav>
+   <title>Aplikasi Data Base Mahasiswa  </title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+<body>
+  
+   <div class="container">
+   <h2>DATA BASE DOSEN</h2>
+   <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+          <th>ID Mahasiswa</th>
+          <th>NIM</th>
+          <th>Nama Dosen</th>
+          <th>Nomer Telepon</th>
+          <th>Email</th>
+          <th>Alamat</th>
+          <th width="10%" colspan="2">Aksi</th>
+      </tr>
+      </thead>
+   
+          <tbody>
+            {% for row in container %}
+            <tr>
+               <td>{{ row[0] }}</td>
+               <td>{{ row[1] }}</td>
+               <td>{{ row[2] }}</td>
+               <td>{{ row[3] }}</td>
+               <td>{{ row[4] }}</td>
+               <td><a href="http://localhost:3000/edit/{{row[0]}}" class="btn btn-warning" role="button">Ubah</a></td>
+               <td><a href="http://localhost:3000/hapus/{{row[0]}}" class="btn btn-danger" role="button">Hapus</a></td>
+            </tr>
+         {% endfor %}
+          </tbody>
+   </table>
+   <a href="http://localhost:3000/tambah" class="btn btn-primary" role="button">Tambah Data</a>
+   </div>
+</body>
+</html>
+
+
+

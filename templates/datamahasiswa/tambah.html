@@ -1,0 +1,126 @@
+<!--
+-->
+<html>
+<head>
+   <title>Aplikasi Data Base Mahasiswa </title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+   <!-- css untuk select2 -->
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   <!-- jika menggunakan bootstrap4 gunakan css ini  -->
+   <link rel="stylesheet"
+       href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+   <!-- cdn bootstrap4 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+</head>
+<body>
+   <nav>
+      <div class="menu">
+          <ul>
+              <li><a href="http://localhost:3000/homepage">Home</a></li>
+              <li class="sub-menu">
+              <a href="hhttp://localhost:3000/viewmahasiswa">Data Base</a>
+                  <div class="sub-menu-konten">
+                      <a href="#">Mahasiswa</a>
+                      <a href="#">Dosen</a>
+                  </div>
+              </li>
+              <li><a href="#">Kontak Saya</a></li>
+              <li><a href="#">Tentang Saya</a></li>
+              <li><a href="#" onClick="return confirm('yakin?')">Logout</a></li>
+          </ul>
+      </div>
+  </nav>
+  
+   <div class="container">
+      <div class="col-sm-5">
+      <h2>Tambah Data Mahasiswa</h2>
+         <form action="{{ url_for('tambah') }}" method="post">
+
+            <div class="form-group">
+               <label>NIM:</label>
+               <input type="text" name="nim" class="form-control" placeholder="Masukan Nim" required />
+            </div>
+            <div class="form-group">
+               <label>Nama Mahasiswa:</label>
+               <input type="text" name="nama" class="form-control" placeholder="Masukan nama Anda" required />
+            </div>
+            <div class="form-group">
+               <label>FAKULTAS</label>
+                  <select name="fakultas" id="fakultas" onchange="populate(this.id,'prodi')" class="form-control" placeholder="Masukan Fakultas Anda" required>
+                     <option value="sosial"></option>
+                     <option value="pertanian">PERTANIAN</option>
+                     <option value="feb">FEB</option>
+                     <option value="fkip">FKIP</option>
+                     <option value="hukum">HUKUM</option>
+                     <option value="fisip">FISIP</option>
+                     <option value="teknik">TEKNIK</option>
+                     <option value="mipa">MIPA</option>
+                     <option value="Komunikasi">FKIK</option>
+                     <option value="agrobisnis">AGROBISNIS</option>
+                 </select>
+            </div>
+            <div class="form-group">
+               <label>PRODI:</label>
+               <select name="prodi" id="prodi" class="form-control" placeholder="Masukan Fakultas Anda" required>
+               </select>
+            </div>
+            <div class="form-group">
+               <label>PHONE:</label>
+               <input type="text" name="phone" class="form-control" placeholder="Masukan Nomer Telephone" required />
+            </div>
+            <div class="form-group">
+               <label>Email:</label>
+               <input type="text" name="alamat" class="form-control" placeholder="Masukan Email Anda" required />
+            </div>
+            <div class="form-group">
+               <label>Alamat:</label>
+               <input type="text" name="email" class="form-control" placeholder="Masukan Alamat Anda" required />
+            </div>
+            <button type="submit" id="Submit" name="submit" class="btn btn-primary">Tambah Data</button>
+      </form>
+   </div>
+</div>
+
+ <!-- wajib jquery  -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+ integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+ crossorigin="anonymous"></script>
+<!-- js untuk bootstrap4  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+ crossorigin="anonymous"></script>
+<!-- js untuk select2  -->
+
+<script>
+   function populate(fakultas,prodi){
+      var fakultas = document.getElementById(fakultas);
+      var prodi = document.getElementById(prodi);
+      prodi.innerHTML = "";
+      if(fakultas.value == "pertanian"){
+         var optionArray = ["|","Agroekoteknologi|Agroekoteknologi","Kehutanan|Kehutanan","Peternakan|Peternakan",];
+      } else if(fakultas.value == "feb"){
+         var optionArray = ["|","Ekonomi Pembangunan|Ekonomi Pembangunan","Manajemen|Manajemen","Teknik Industri|Teknik Industri",
+         "Teknik Mesin|Teknik Mesin",];
+      } else if(fakultas.value == "BISNIS"){
+         var optionArray = ["|","mustang|Mustang","shelby|Shelby"];
+      } else if(fakultas.value == "Akuntasi"){
+         var optionArray = ["","","",]
+      } else if(fakultas.value == ""){
+         var optionArray = ["",]
+      }
+      for(var option in optionArray){
+         var pair = optionArray[option].split("|");
+         var newOption = document.createElement("option");
+         newOption.value = pair[0];
+         newOption.innerHTML = pair[1];
+         prodi.options.add(newOption);
+      }
+   }
+   </script>
+</body>
+</html>

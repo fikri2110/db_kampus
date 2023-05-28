@@ -1,0 +1,68 @@
+<!-- 
+   
+-->
+<html>
+<head>
+   <title>Aplikasi Data Base Mahasiswa  </title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="menu">
+            <ul>
+                <li><a href="http://localhost:3000/homepage">Home</a></li>
+                <li class="sub-menu">
+                <a href="http://localhost:3000/viewmahasiswa">Data Base</a>
+                    <div class="sub-menu-konten">
+                        <a href="#">Mahasiswa</a>
+                        <a href="#">Dosen</a>
+                    </div>
+                </li>
+                <li><a href="#">Kontak Saya</a></li>
+                <li><a href="#">Tentang Saya</a></li>
+                <li><a href="#" onClick="return confirm('yakin?')">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+   <div class="container">
+   <h2>Aplikasi Data Base Mahasiswa Universitas Terbuka</h2>
+   <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+          <th>ID Mahasiswa</th>
+          <th>NIM</th>
+          <th>Nama Mahasiswa</th>
+          <th>FAKULTAS</th>
+          <th>PRODI</th>
+          <th>Nomer Telepon</th>
+          <th>Email</th>
+          <th>Alamat</th>
+          <th width="10%" colspan="2">Aksi</th>
+      </tr>
+      </thead>
+   
+          <tbody>
+            {% for row in container %}
+            <tr>
+               <td>{{ row[0] }}</td>
+               <td>{{ row[1] }}</td>
+               <td>{{ row[2] }}</td>
+               <td>{{ row[3] }}</td>
+               <td>{{ row[4] }}</td>
+               <td>{{ row[5] }}</td>
+               <td>{{ row[6] }}</td>
+               <td><a href="http://localhost:3000/editmahasiswa/{{row[0]}}" class="btn btn-warning" role="button">Ubah</a></td>
+               <td><a href="http://localhost:3000/hapusmahasiswa/{{row[0]}}" class="btn btn-danger" role="button">Hapus</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+   </table>
+   <a href="http://localhost:3000/tambahmahasiswa" class="btn btn-primary" role="button">Tambah Data</a>
+   </div>
+</body>
+</html>
+
+
+
